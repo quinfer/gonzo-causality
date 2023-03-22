@@ -1,0 +1,471 @@
+---
+title: "Causality and AI"
+author:
+  - name: Barry Quinn
+    affiliations:
+      - Queen's Managment School (Finance Group)
+      - Royal Statistical Society (Chartership)
+    orcid: 0000-0002-8637-9060
+format: 
+  revealjs:
+    css: mycssblend.css
+    slide-number: true
+    show-slide-number: all
+    scrollable: true
+    code-tools:
+      source: true
+bibliography: references.bib
+execute:
+  echo: false
+editor: visual
+---
+
+```{r}
+#| label: set-up
+#| include: false
+library(tidyverse)
+```
+
+## Outline {.saltinline}
+
+-   Causality and AI
+-   What is Causality
+-   Importance of Causality
+-   Causal modelling
+-   The DAG!
+-   Selection bias
+-   Systemic risk example
+
+## Causality and AI
+
+-   We live in the age of AI implementation [@Lee.2018]
+
+-   But causality in machine learning is still an important area of AI research and innovation [@Forney.2021].
+
+-   In recent years, the demand for trustworthy AI has highlighted a need for causal reasoning to overcome the limitations of association-based machine learning [@Nogueira.2022]
+
+-   Explainable AI can only take us so far, so Causality is become more important for AI researchers.
+
+## What is Causality? {.saltinline}
+
+-   The study of causality is fragmented, with several contributions from such diverse fields as
+-   philosophy,
+-   statistics,
+-   economics,
+-   epidemiology
+-   and computer science.
+-   Today we will look at a causal model using in AI.
+
+## What is Causality?
+
+![](images/bookofwhy.png)
+
+-   The study of causality aims to answet Why? questions.
+
+-   In 2011 Pearl won the Turing Award, computer science's highest honor, for "fundamental contributions to artificial intelligence through the development of a calculus of probabilistic and causal reasoning,"
+
+## What is Causality?
+
+![Causal Inference: the mixtape, Cunningham (2021)](images/mixtape.jpg){width="10%"}
+
+-   In economics causality is the leveraging of theory and deep knowledge of institutional details to estimate the impact of events and choices on a given outcome of interest- @whatis2021
+
+## No correlation does not mean no causation {.small}
+
+::: hand
+correlation does mean causality
+:::
+
+-   is a almost a cliche and is well understand, no observed correlation is not an indication of no causal relationship
+
+::: callout-important
+## Rethinking Causality
+
+An example: To avoid a recession central bank policy would be to engaging in aggressive open-market operations, buying bonds and pumping liquidity into the economy to avoid a recession.
+:::
+
+-   If this behaviour is *optimal* we would not *observe* any evidence.
+
+## Optimising makes everything endogeneous {.smaller}
+
+-   In causal language, humans beings engaging in optimal behaviour are the reason correlations almost never reveal causal relationships
+
+-   This is because human beings rarely act randomly, but for causal effects to be identified randomness needs to be present.
+
+-   Economic theory tells us to be suspicious of correlations in observed data, as people's choices are optimal to the potential outcome.
+
+-   Thus, choices are *endogeneous*, and correlation between choices and outcomes, in aggregate, rarely represent causality.
+
+## Credible research and make believe {.saltinline .small}
+
+::: incremental
+-   Causality requires a vivid imagination about scientific discovery.
+-   Identifying causal effects involves assumptions and a belief system doing credible scientific analysis
+-   Credible research requires following process oriented methods not outcome oriented methods (e.g. confirmation bias, statistical significance, HARKing, etc).
+-   True scientific methodologies allow us to accept unexpected, sometimes undesirable, answers.
+-   Unfortunately, business schools incentives do not help us here.
+:::
+
+## Causality divisions {.smaller}
+
+-   Causality is a broad concept and can be subdivided into causal discovery and inference.
+
+**Roughly speaking in AI:**
+
+1.  Causal discovery is analysing and creating models that illustrate the relationship inherent in the data.
+
+-   In AI Causal Discovery is an algorithmic discipline using observational data (more next time)
+
+2.  Causal inference is the estimation of the impact of a change in one variable over the outcome of interest.
+
+## Scientific causal modeling methodologies {.smaller}
+
+-   In general, causal models are imagined mathematical constructs.
+-   The imagination is guided by
+-   theory,
+-   other scientific models,
+-   conversations with experts,
+-   your own observations and experiences,
+-   literature reviews,
+-   as well as your own intuition and hypothesis.
+
+## Scientific causal modeling methodologies {.smaller}
+
+-   To such scientific methods are
+
+::: glow
+-   Potential Outcomes Models (covered by Archangelo)
+-   Directed Acyclical Graphs (DAGs) or Causal Graph Modelling
+:::
+
+## DAGs
+
+-   A useful alternative to mathematical algebra although largely ignored in business and economics research.[One exception is @imbens2019]
+-   Directed Acyclic Graphs trace their origins to the casual path analysis of Sewell (1929)
+-   They were revitalised by the work of Turing Award winner Judea Pearl in 2009
+
+## I like DAGS
+
+::: columns
+::: {.column width="40%"}
+{{< video https://youtu.be/zH64dlgyydM >}}
+:::
+
+::: {.column .small width="60%"}
+-   DAGs run forward in time using graph notation.
+-   DAGs explain causality in terms of counterfactuals.
+-   DAGs compare two states of the world:
+
+1.  What happened when some intervention took place
+2.  What did not happen under some other intervention **; counterfactual**
+:::
+:::
+
+## DAGs explained {.smaller}
+
+-   It is a *model* of the real world representing the *theoretical state-of-the-art* knowledge about the phenomena being studied.
+-   It is a graphical representation of a chain of causal effects based on **unobserved structured process**.
+-   The graph consists of nodes and arrows.
+-   Nodes are random variables assumed to eminate from a data-generating process
+-   The arrows capture causal direction.
+-   Causal effects can be direct $D \to Y$ or mediated by a third variable $D \to X\to Y$
+
+## DAGS explained {.saltinline}
+
+-   DAG require a explicit commitment to a causal effect pathway.
+-   DAG require a complete commitment to the lact of causal pathway for missing arrows.
+-   These are strong beliefs.
+
+## Simple DAG with confounder X
+
+::: panel-tabset
+## DAG code
+
+```{r}
+#| echo: true
+#| eval: false 
+library(ggdag)
+library(ggdag)
+library(ggplot2)
+theme_set(theme_dag())
+simple_dag <- dagify(Y~D,Y~X,D~X) |> tidy_dagitty()
+ggdag(simple_dag)
+```
+
+## DAG output
+
+```{r}
+library(ggdag)
+library(ggdag)
+library(ggplot2)
+theme_set(theme_dag())
+simple_dag <- dagify(Y~D,Y~X,D~X) |> tidy_dagitty()
+ggdag(simple_dag)
+```
+
+## DAG explained
+
+::: small
+-   In this DAG we have three random variables: X, D, and Y
+-   The direct path $D \to Y$ represents the causal effect
+-   The second path from D to Y $D \leftarrow X \to Y$ is the **backdoor path**, which is **not causal** but cause by a spurious correlation driven by variations in X
+-   The backdoor path is analogous to the notion of omitted variable bias.
+-   Another name for a confounder is a non-collider
+:::
+
+::: callout-important
+## Rethinking Causality
+
+-   Recall that OMB is where a variable is omitted that determines the outcome and the treatment variables, so not controlling for omitted variable bias in regression analysis is like leaving a backdoor open!
+-   In econometrics a collider would also be called a bad control.
+:::
+:::
+
+## Simple DAG with unobserved confounder
+
+::: panel-tabset
+## DAG code
+
+```{r}
+#| echo: true
+#| eval: false 
+theme_set(theme_dag())
+simple_dag <- dagify(Y~D,Y~U,D~U,latent = 'U',outcome="Y",exposure = "D") |> tidy_dagitty()
+ggdag_paths(simple_dag,shadow = T,limit = 1)
+```
+
+## DAG output
+
+```{r}
+theme_set(theme_dag())
+simple_dag <- dagify(Y~D,Y~U,D~U,latent = 'U',outcome="Y",exposure = "D") |> tidy_dagitty()
+ggdag_paths(simple_dag,shadow = T,limit = 1)
+```
+
+## DAG explained
+
+::: small
+-   In this DAG our confounder is unobserved (grey-out)
+-   The direct path $D \to Y$ represents the causal effect
+-   The second path from D to Y $D \leftarrow U \to Y$ is the **backdoor path**, but as U is unobserved the backdoor path is open
+:::
+
+::: callout-important
+## Rethinking Causality
+
+In this instance, we cannot close the backdoor path as the U is not in the data set.
+:::
+:::
+
+## Colliders explained
+
+::: panel-tabset
+## DAG output
+
+```{r}
+library(ggdag)
+library(ggdag)
+library(ggplot2)
+theme_set(theme_dag())
+simple_dag <- dagify(Y~D,X~Y,X~D) |> tidy_dagitty()
+ggdag(simple_dag)
+```
+
+## Collider explained
+
+::: small
+-   There are 2 paths $D \to Y$ (causal effect) and $D \to X \leftarrow Y$ is the **backdoor path**.
+-   But notice that the arrows toward X are reversed, here X is called a collider.
+:::
+
+::: callout-important
+## Rethinking Causality
+
+X is a collider along this backdoor path because D and the causal effects of Y collide at X. Importantly, colliders close a backdoor path, so should be left alone and not controlled for in a causal inference estimation.
+:::
+:::
+
+## Backdoor critierion
+
+-   Backdoor creates systematic noncasual relationships
+-   Open backdoor paths create omitted variable bias
+-   The goal is to close these paths and isolate the causal effect $D \to Y$
+-   Closing both involves causal inference research designs and identification strategies (more later)
+-   We can close these paths using two strategies
+
+1.  Conditioning on the confounder (subclassification, matching, regression etc)
+2.  Identifying colliders and ignoring them in you strategy
+
+## Collider bias {.smaller}
+
+-   Unfortunately data set do not come with *collider* and *confounder* labels.
+-   This means we need to revert to theory and prior expert knowledge.
+-   Inappropriately controlling for a collider variable, by study design or statistical analysis, results in collider bias.
+-   Controlling for a collider can induce a distorted association between the exposure and outcome, when in fact none exists.
+-   This bias predominantly occurs in observational studies.
+-   Because collider bias can be induced by sampling, selection bias can sometimes be considered to be a form of collider bias.
+-   The diagram below contrasts bias through confounding and collider bias.
+
+![](images/Collider-bias.png)
+
+## Sample selection and collider bias {.smaller}
+
+::: panel-tabset
+## An silly simulation
+
+-   Nonrandom sampling has been a known problem in causal inference for decades @heckman1979
+-   What follows is a silly example if sample selection and collider bias.
+-   Suppose a news report, based on a survey of the top 15% of premier league players, suggested that the attractiveness of players is negative correlated with their footballing talent
+
+## Simulated example
+
+```{r}
+#| label: fig-select
+#| fig-subcap: 
+#|   - Joint distribution of footballers talent and beauty
+#|   - Sample selected
+#|   - Sample not selected
+
+library(tidyverse)
+theme_set(theme_bw())
+set.seed(3444)
+
+star_is_born <- tibble(
+  beauty = rnorm(2500),
+  talent = rnorm(2500),
+  score = beauty + talent,
+  c85 = quantile(score, .85),
+  star = ifelse(score>=c85,1,0)
+)
+
+star_is_born %>% 
+  # lm(beauty ~ talent, .) %>% 
+  ggplot(aes(x = talent, y = beauty)) +
+  geom_point(size = 0.5, shape=23)
+
+star_is_born %>% 
+  filter(star == 1) %>% 
+  lm(beauty ~ talent, .) %>% 
+  ggplot(aes(x = talent, y = beauty)) +
+  geom_point(size = 0.5, shape=23) 
+
+star_is_born %>% 
+  filter(star == 0) %>% 
+  lm(beauty ~ talent, .) %>% 
+  ggplot(aes(x = talent, y = beauty)) +
+  geom_point(size = 0.5, shape=23) 
+```
+
+## Discussions
+
+-   Figure 1 shows the joint distribution of the player attributes beauty and talent
+-   We can see there is no relationship
+-   Figure 2 show the sample selected; the top 85th percentile of the linear combination of the distribution of talent and beauty
+-   This frontier of the data cloud has a negative slope creating a negative correlation between talent and beauty for the sample used in the fake news report.
+:::
+
+## Collider bias and financial risk modeling {.smaller}
+
+-   Most current financial models are based on the assumption that risk is created by an outside natural or man-made disaster -- what many would call an "act of God" and which economists call an exogenous shock.
+
+-   That risk within the financial system is created by people interacting with each other.
+
+-   This is known as endogenous risk, which comes from the ancient Greek words for "growing" and "within".
+
+-   The term endogenous risk was first coined by researchers at the LSE @danielsson2013
+
+## Collider bias and financial risk modeling {.smaller}
+
+-   It is based on the idea that everything that takes place in a financial system is caused by the interaction of all the players in the market, whether financial institutions, traders, regulators or policymakers, who are all pursuing their own objectives.
+
+-   These agents continually study and react to the financial system, changing its nature in the process. In other words, the financial system is not invariant under observation; by studying it, we change it.
+
+-   Most of the time, these individual economic agents behave in a way that cancels out shocks. For example, the same event may prompt some to buy an asset and others to sell it.
+
+## Collider bias and systemic risk {.smaller}
+
+-   Systemic risk is realised when this no longer happens because the agents start behaving in a harmonious way; the distress of one agent triggers behaviour that causes distress in other agents, who then further spread trouble.
+
+-   In other words, individual economic agents react to some particular event, and their actions in turn affect their environment through a network of feedback loops and mechanisms.
+
+-   Endogenous feedback between the behaviour of market participants can suddenly and unexpectedly create a vicious cycle, causing a crisis.
+
+## DAGS: Collider bias, policy actions and system risk {.smaller}
+
+::: columns
+::: {.column width="50%"}
+```{r}
+simple_dag <- dagify(Y~D,Y~U,D~U,
+                     labels=c("Y"="Systemic\n Risk",
+                              "D"="Policy\n Action",
+                              "U"= "Volatility \n Feedback \n Loop"),
+                     latent = 'U',outcome="Y",exposure = "D") |> tidy_dagitty()
+ggdag_paths(simple_dag, use_labels = "label",shadow = TRUE)
+
+```
+:::
+
+::: {.column width="50%"}
+-   In the DAG we see that study policy actions to stem systemic risk is challenged by latent volatility feedback loop
+-   In practice when modelling systemic risk and the effects of policy action, we most consider this collider bias
+:::
+:::
+
+## 
+
+::: glow
+-   Thanks for listen
+-   Questions?
+:::
+
+## References
+
+<!-- ## Causal Discovery in AI {.smaller} -->
+
+<!-- - AI has developed some interesting algorithms to learn causal relationship among variables form observational data. -->
+
+<!-- - The algorithm to use depends on wether the data is time series, crossectional or longitudinal. -->
+
+<!-- - These algorithms can be categorised as  -->
+
+<!-- ### Constraint-based algorithms -->
+
+<!-- - Employ independence tests to identify a set of edge or arrow constraints for the graph using observational data. -->
+
+<!-- - One of the most well-known is PC ( Peter and Clark; Spirtes et al., 2000) -->
+
+<!-- - It relies on firstly searching for independencies and then orienting dependencies. -->
+
+<!-- ### Score-based algorithms -->
+
+<!-- - Assign a relevance score to candidate graphs through some adjustment measures, such as the Bayesian Information Criterion (BIC).  -->
+
+<!-- - Computationally expensive since they have to enumerate (and score) every possible graph among the given variables.  -->
+
+<!-- - In addition, greedy heuristics are applied to restrict the number of candidates. -->
+
+<!-- ## Example in time series data {.smaller} -->
+
+<!-- - The search of causal relationships among variables in time-series data has seen an exponential increase in interest in recent years, with sequential data collection becoming a common practice.  -->
+
+<!-- - This is practically the case in finance data. -->
+
+<!-- - Causal discovery from this type of data can overcome the problems found in cross-sectional data.  -->
+
+<!-- - Furthermore, since there is a time component, we can assume causal precedence: events in the present cannot cause events in the past.  -->
+
+<!-- - Thus, when faced with an identified (undirected) dependence, it is safe to assume the relationship's direction as past $\to $ future. -->
+
+<!-- ## Granger causality (Granger, 1969) -->
+
+<!-- - One of the most well-known frameoworks for causal discovery in time series in Granger causality. -->
+
+<!-- - Granger himself criticises this naming of this procedure and perfer the use of precedence instead of causality. -->
+
+<!-- - Mathematically, the relationship is tested using auto-regression such as: -->
+
+<!-- $$Y_t=\sum_{j=1}^m\alpha_j Y_{t-j}+\sum_{j=1}^mb_jX_{t-j} + \epsilon_t$$ -->
+
+<!-- - where causality is determined by the significant of $\alpha's$ after conditioning $X's$ -->
+
+<!-- ## A chicken and egg example -->
