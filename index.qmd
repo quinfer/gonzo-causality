@@ -44,7 +44,7 @@ library(tidyverse)
 
 -   In recent years, the demand for trustworthy AI has highlighted a need for causal reasoning to overcome the limitations of association-based machine learning [@Nogueira.2022]
 
--   Explainable AI can only take us so far, so Causality is become more important for AI researchers.
+-   Explainable AI as a discipline is maturing and is being linked to classical causal reasoning in computer science [@Zhao.2021] and cognitive psychology[@Covert.2020] .
 
 ## What is Causality? {.saltinline}
 
@@ -60,9 +60,9 @@ library(tidyverse)
 
 ![](images/bookofwhy.png)
 
--   The study of causality aims to answet Why? questions.
+-   The study of causality aims to answer Why? questions.
 
--   In 2011 Pearl won the Turing Award, computer science's highest honor, for "fundamental contributions to artificial intelligence through the development of a calculus of probabilistic and causal reasoning,"
+-   In 2011 Pearl won the Turing Award, computer science's highest honor, for "fundamental contributions to artificial intelligence through the development of a calculus of probabilistic and causal reasoning,". Book reference [@pearl2009]
 
 ## What is Causality?
 
@@ -86,7 +86,7 @@ An example: To avoid a recession central bank policy would be to engaging in agg
 
 -   If this behaviour is *optimal* we would not *observe* any evidence.
 
-## Optimising makes everything endogeneous {.smaller}
+## Optimising makes everything endogenous {.smaller}
 
 -   In causal language, humans beings engaging in optimal behaviour are the reason correlations almost never reveal causal relationships
 
@@ -94,7 +94,7 @@ An example: To avoid a recession central bank policy would be to engaging in agg
 
 -   Economic theory tells us to be suspicious of correlations in observed data, as people's choices are optimal to the potential outcome.
 
--   Thus, choices are *endogeneous*, and correlation between choices and outcomes, in aggregate, rarely represent causality.
+-   Thus, choices are **endogenous**, and correlation between choices and outcomes, in aggregate, rarely represent causality.
 
 ## Credible research and make believe {.saltinline .small}
 
@@ -153,11 +153,11 @@ An example: To avoid a recession central bank policy would be to engaging in agg
 
 ::: {.column .small width="60%"}
 -   DAGs run forward in time using graph notation.
--   DAGs explain causality in terms of counterfactuals.
+-   DAGs explain causality in terms of counter-factuals.
 -   DAGs compare two states of the world:
 
 1.  What happened when some intervention took place
-2.  What did not happen under some other intervention **; counterfactual**
+2.  What did not happen under some other intervention **; counter-factual**
 :::
 :::
 
@@ -166,14 +166,14 @@ An example: To avoid a recession central bank policy would be to engaging in agg
 -   It is a *model* of the real world representing the *theoretical state-of-the-art* knowledge about the phenomena being studied.
 -   It is a graphical representation of a chain of causal effects based on **unobserved structured process**.
 -   The graph consists of nodes and arrows.
--   Nodes are random variables assumed to eminate from a data-generating process
+-   Nodes are random variables assumed to emanate from a data-generating process
 -   The arrows capture causal direction.
 -   Causal effects can be direct $D \to Y$ or mediated by a third variable $D \to X\to Y$
 
 ## DAGS explained {.saltinline}
 
 -   DAG require a explicit commitment to a causal effect pathway.
--   DAG require a complete commitment to the lact of causal pathway for missing arrows.
+-   DAG require a complete commitment to the lack of causal pathway for missing arrows.
 -   These are strong beliefs.
 
 ## Simple DAG with confounder X
@@ -263,9 +263,6 @@ In this instance, we cannot close the backdoor path as the U is not in the data 
 ## DAG output
 
 ```{r}
-library(ggdag)
-library(ggdag)
-library(ggplot2)
 theme_set(theme_dag())
 simple_dag <- dagify(Y~D,X~Y,X~D) |> tidy_dagitty()
 ggdag(simple_dag)
@@ -298,6 +295,9 @@ X is a collider along this backdoor path because D and the causal effects of Y c
 
 ## Collider bias {.smaller}
 
+::: panel-tabset
+
+## Explanation
 -   Unfortunately data set do not come with *collider* and *confounder* labels.
 -   This means we need to revert to theory and prior expert knowledge.
 -   Inappropriately controlling for a collider variable, by study design or statistical analysis, results in collider bias.
@@ -306,7 +306,11 @@ X is a collider along this backdoor path because D and the causal effects of Y c
 -   Because collider bias can be induced by sampling, selection bias can sometimes be considered to be a form of collider bias.
 -   The diagram below contrasts bias through confounding and collider bias.
 
-![](images/Collider-bias.png)
+## Visualisation of bias
+![[From Oxford Universities Catalogue of Bias](https://catalogofbias.org)](images/Collider-bias.png)
+
+:::
+
 
 ## Sample selection and collider bias {.smaller}
 

@@ -444,7 +444,7 @@ Barry Quinn <a href="https://orcid.org/0000-0002-8637-9060" class="quarto-title-
 <li><p>We live in the age of AI implementation <span class="citation" data-cites="Lee.2018">(<a href="#/references" role="doc-biblioref" onclick="">Lee 2018</a>)</span></p></li>
 <li><p>But causality in machine learning is still an important area of AI research and innovation <span class="citation" data-cites="Forney.2021">(<a href="#/references" role="doc-biblioref" onclick="">Forney and Mueller 2021</a>)</span>.</p></li>
 <li><p>In recent years, the demand for trustworthy AI has highlighted a need for causal reasoning to overcome the limitations of association-based machine learning <span class="citation" data-cites="Nogueira.2022">(<a href="#/references" role="doc-biblioref" onclick="">Nogueira et al. 2022</a>)</span></p></li>
-<li><p>Explainable AI can only take us so far, so Causality is become more important for AI researchers.</p></li>
+<li><p>Explainable AI as a discipline is maturing and is being linked to classical causal reasoning in computer science <span class="citation" data-cites="Zhao.2021">(<a href="#/references" role="doc-biblioref" onclick="">Zhao and Hastie 2021</a>)</span> and cognitive psychology<span class="citation" data-cites="Covert.2020">(<a href="#/references" role="doc-biblioref" onclick="">Covert, Lundberg, and Lee 2020</a>)</span> .</p></li>
 </ul>
 </section>
 <section id="what-is-causality" class="slide level2 saltinline">
@@ -463,8 +463,8 @@ Barry Quinn <a href="https://orcid.org/0000-0002-8637-9060" class="quarto-title-
 <h2>What is Causality?</h2>
 
 <img data-src="images/bookofwhy.png" class="r-stretch"><ul>
-<li><p>The study of causality aims to answet Why? questions.</p></li>
-<li><p>In 2011 Pearl won the Turing Award, computer science’s highest honor, for “fundamental contributions to artificial intelligence through the development of a calculus of probabilistic and causal reasoning,”</p></li>
+<li><p>The study of causality aims to answer Why? questions.</p></li>
+<li><p>In 2011 Pearl won the Turing Award, computer science’s highest honor, for “fundamental contributions to artificial intelligence through the development of a calculus of probabilistic and causal reasoning,”. Book reference <span class="citation" data-cites="pearl2009">(<a href="#/references" role="doc-biblioref" onclick="">Pearl 2009</a>)</span></p></li>
 </ul>
 </section>
 <section id="what-is-causality-2" class="slide level2">
@@ -499,13 +499,13 @@ Barry Quinn <a href="https://orcid.org/0000-0002-8637-9060" class="quarto-title-
 <li>If this behaviour is <em>optimal</em> we would not <em>observe</em> any evidence.</li>
 </ul>
 </section>
-<section id="optimising-makes-everything-endogeneous" class="slide level2 smaller">
-<h2>Optimising makes everything endogeneous</h2>
+<section id="optimising-makes-everything-endogenous" class="slide level2 smaller">
+<h2>Optimising makes everything endogenous</h2>
 <ul>
 <li><p>In causal language, humans beings engaging in optimal behaviour are the reason correlations almost never reveal causal relationships</p></li>
 <li><p>This is because human beings rarely act randomly, but for causal effects to be identified randomness needs to be present.</p></li>
 <li><p>Economic theory tells us to be suspicious of correlations in observed data, as people’s choices are optimal to the potential outcome.</p></li>
-<li><p>Thus, choices are <em>endogeneous</em>, and correlation between choices and outcomes, in aggregate, rarely represent causality.</p></li>
+<li><p>Thus, choices are <strong>endogenous</strong>, and correlation between choices and outcomes, in aggregate, rarely represent causality.</p></li>
 </ul>
 </section>
 <section id="credible-research-and-make-believe" class="slide level2 saltinline small">
@@ -577,12 +577,12 @@ Barry Quinn <a href="https://orcid.org/0000-0002-8637-9060" class="quarto-title-
 </div><div class="column small" style="width:60%;">
 <ul>
 <li>DAGs run forward in time using graph notation.</li>
-<li>DAGs explain causality in terms of counterfactuals.</li>
+<li>DAGs explain causality in terms of counter-factuals.</li>
 <li>DAGs compare two states of the world:</li>
 </ul>
 <ol type="1">
 <li>What happened when some intervention took place</li>
-<li>What did not happen under some other intervention <strong>; counterfactual</strong></li>
+<li>What did not happen under some other intervention <strong>; counter-factual</strong></li>
 </ol>
 </div>
 </div>
@@ -593,7 +593,7 @@ Barry Quinn <a href="https://orcid.org/0000-0002-8637-9060" class="quarto-title-
 <li>It is a <em>model</em> of the real world representing the <em>theoretical state-of-the-art</em> knowledge about the phenomena being studied.</li>
 <li>It is a graphical representation of a chain of causal effects based on <strong>unobserved structured process</strong>.</li>
 <li>The graph consists of nodes and arrows.</li>
-<li>Nodes are random variables assumed to eminate from a data-generating process</li>
+<li>Nodes are random variables assumed to emanate from a data-generating process</li>
 <li>The arrows capture causal direction.</li>
 <li>Causal effects can be direct <span class="math inline">\(D \to Y\)</span> or mediated by a third variable <span class="math inline">\(D \to X\to Y\)</span></li>
 </ul>
@@ -602,7 +602,7 @@ Barry Quinn <a href="https://orcid.org/0000-0002-8637-9060" class="quarto-title-
 <h2>DAGS explained</h2>
 <ul>
 <li>DAG require a explicit commitment to a causal effect pathway.</li>
-<li>DAG require a complete commitment to the lact of causal pathway for missing arrows.</li>
+<li>DAG require a complete commitment to the lack of causal pathway for missing arrows.</li>
 <li>These are strong beliefs.</li>
 </ul>
 </section>
@@ -754,6 +754,10 @@ Barry Quinn <a href="https://orcid.org/0000-0002-8637-9060" class="quarto-title-
 </section>
 <section id="collider-bias" class="slide level2 smaller">
 <h2>Collider bias</h2>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Explanation</a></li><li><a href="#tabset-4-2">Visualisation of bias</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
 <ul>
 <li>Unfortunately data set do not come with <em>collider</em> and <em>confounder</em> labels.</li>
 <li>This means we need to revert to theory and prior expert knowledge.</li>
@@ -763,21 +767,31 @@ Barry Quinn <a href="https://orcid.org/0000-0002-8637-9060" class="quarto-title-
 <li>Because collider bias can be induced by sampling, selection bias can sometimes be considered to be a form of collider bias.</li>
 <li>The diagram below contrasts bias through confounding and collider bias.</li>
 </ul>
-
-<img data-src="images/Collider-bias.png" class="r-stretch"></section>
+</div>
+<div id="tabset-4-2">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/Collider-bias.png"></p>
+<p></p><figcaption><a href="https://catalogofbias.org">From Oxford Universities Catalogue of Bias</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="sample-selection-and-collider-bias" class="slide level2 smaller">
 <h2>Sample selection and collider bias</h2>
 <div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">An silly simulation</a></li><li><a href="#tabset-4-2">Simulated example</a></li><li><a href="#tabset-4-3">Discussions</a></li></ul>
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">An silly simulation</a></li><li><a href="#tabset-5-2">Simulated example</a></li><li><a href="#tabset-5-3">Discussions</a></li></ul>
 <div class="tab-content">
-<div id="tabset-4-1">
+<div id="tabset-5-1">
 <ul>
 <li>Nonrandom sampling has been a known problem in causal inference for decades <span class="citation" data-cites="heckman1979">Heckman (<a href="#/references" role="doc-biblioref" onclick="">1979</a>)</span></li>
 <li>What follows is a silly example if sample selection and collider bias.</li>
 <li>Suppose a news report, based on a survey of the top 15% of premier league players, suggested that the attractiveness of players is negative correlated with their footballing talent</li>
 </ul>
 </div>
-<div id="tabset-4-2">
+<div id="tabset-5-2">
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-select-1" class="quarto-figure quarto-figure-center">
@@ -805,7 +819,7 @@ Barry Quinn <a href="https://orcid.org/0000-0002-8637-9060" class="quarto-title-
 </div>
 </div>
 </div>
-<div id="tabset-4-3">
+<div id="tabset-5-3">
 <ul>
 <li>Figure 1 shows the joint distribution of the player attributes beauty and talent</li>
 <li>We can see there is no relationship</li>
@@ -898,6 +912,9 @@ Barry Quinn <a href="https://orcid.org/0000-0002-8637-9060" class="quarto-title-
 
 </div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Covert.2020" class="csl-entry" role="doc-biblioentry">
+Covert, Ian, Scott Lundberg, and Su-In Lee. 2020. <span>“Explaining by Removing: A Unified Framework for Model Explanation.”</span> arXiv. <a href="https://doi.org/10.48550/ARXIV.2011.14878">https://doi.org/10.48550/ARXIV.2011.14878</a>.
+</div>
 <div id="ref-whatis2021" class="csl-entry" role="doc-biblioentry">
 Cunningham, Scott. 2021. <span>“What Is Causal Inference?”</span> In, 3–6. Yale University Press. <a href="https://doi.org/10.12987/9780300255881-003">https://doi.org/10.12987/9780300255881-003</a>.
 </div>
@@ -918,6 +935,12 @@ Lee, Kai-Fu. 2018. <em>AI Superpowers: China, Silicon Valley, and the New World 
 </div>
 <div id="ref-Nogueira.2022" class="csl-entry" role="doc-biblioentry">
 Nogueira, Ana Rita, Andrea Pugnana, Salvatore Ruggieri, Dino Pedreschi, and João Gama. 2022. <span>“<span class="nocase">Methods and tools for causal discovery and causal inference</span>.”</span> <em>Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery</em> 12 (2). <a href="https://doi.org/10.1002/widm.1449">https://doi.org/10.1002/widm.1449</a>.
+</div>
+<div id="ref-pearl2009" class="csl-entry" role="doc-biblioentry">
+Pearl, Judea. 2009. <span>“Causality,”</span> September. <a href="https://doi.org/10.1017/cbo9780511803161">https://doi.org/10.1017/cbo9780511803161</a>.
+</div>
+<div id="ref-Zhao.2021" class="csl-entry" role="doc-biblioentry">
+Zhao, Qingyuan, and Trevor Hastie. 2021. <span>“<span class="nocase">Causal Interpretations of Black-Box Models</span>.”</span> <em>Journal of Business &amp; Economic Statistics</em> 39 (1): 1–19. <a href="https://doi.org/10.1080/07350015.2019.1624293">https://doi.org/10.1080/07350015.2019.1624293</a>.
 </div>
 </div>
 </section>
